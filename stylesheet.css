@@ -135,8 +135,40 @@ span.highlight {
 }
 
 .colored-box {
-    color: black;
-    padding: 20px;
-    display: inline-block;
-    border-radius: 10px;
+  color: black;
+  padding: 20px;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.skill-card {
+  background: #f7f9fc;
+  border-left: 3px solid #1772d0;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.skill-card strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 7px;
+}
+
+.skill-card span {
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
 }
