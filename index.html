@@ -8,16 +8,27 @@
 
   <meta name="author" content="TaeHan Lee">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <link rel="icon" href="images/favicon/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="images/favicon/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="images/favicon/apple-touch-icon.png">
   <link rel="manifest" href="images/favicon/site.webmanifest">
   <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
+  <script>
+    (function () {
+      var savedTheme = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    }());
+  </script>
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
 </head>
 
 <body>
+  <div class="theme-bar">
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">Dark</button>
+  </div>
   <table
     style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
     <tbody>
@@ -74,19 +85,19 @@
                   <div class="skill-grid">
                     <div class="skill-card">
                       <strong>Languages</strong>
-                      <span>Python · R · Java · SQL · TypeScript</span>
+                      <span>Python / R / Java / SQL / TypeScript</span>
                     </div>
                     <div class="skill-card">
                       <strong>Data / ML</strong>
-                      <span>Pandas · NumPy · scikit-learn · PyTorch</span>
+                      <span>Pandas / NumPy / scikit-learn / PyTorch</span>
                     </div>
                     <div class="skill-card">
                       <strong>Big Data</strong>
-                      <span>Spark · PySpark · Hive · HDFS</span>
+                      <span>Spark / PySpark / Hive / HDFS</span>
                     </div>
                     <div class="skill-card">
                       <strong>Web / Visualization</strong>
-                      <span>React · Vite · Pyodide · Plotly · Matplotlib</span>
+                      <span>React / Vite / Pyodide / Plotly / Matplotlib</span>
                     </div>
                   </div>
                 </td>
@@ -144,6 +155,25 @@
       </tr>
     </tbody>
   </table>
+  <script>
+    (function () {
+      var toggle = document.querySelector('.theme-toggle');
+
+      function applyTheme(theme) {
+        var isDark = theme === 'dark';
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem('theme', theme);
+        toggle.textContent = isDark ? 'Light' : 'Dark';
+        toggle.setAttribute('aria-pressed', String(isDark));
+        toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+
+      applyTheme(document.documentElement.dataset.theme || 'light');
+      toggle.addEventListener('click', function () {
+        applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+      });
+    }());
+  </script>
 </body>
 
 </html>
